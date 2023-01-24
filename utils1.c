@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:08:29 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/01/24 19:41:45 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/01/24 19:44:30 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	unsigned char	*s1cpy;
 	unsigned char	*s2cpy;
 
-	i = 0;
+	if (ft_strlen((char *) s2) != n)
+        return (1);
+    i = 0;
 	s1cpy = (unsigned char *)s1;
 	s2cpy = (unsigned char *)s2;
-    if (ft_strlen((char *) s2cpy) != n)
-        return (1);
 	while (i < n)
 	{
 		if (s1cpy[i] != s2cpy[i])
