@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:09:31 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/01/24 19:43:06 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/01/25 20:28:20 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	has_duplicates(char **args, int count)
 		i = 1;
 		while (i < (count - y) && *(args + i))
 		{
-            if (ft_memcmp(*args, *(args+i), ft_strlen(*args)) == 0)
+			if (ft_atoi(*args) == ft_atoi(*(args+i)))
             	return (1);
 			i += 1;
 		}
@@ -42,32 +42,41 @@ int	has_duplicates(char **args, int count)
 
 int	has_errors(char **args)
 {
-	size_t	i;
+	size_t  i;
+	char	*str;
 
-	while (*args)
+    while (*args)
 	{
 		i = 0;
-		while (*args[i])
+		str = *args;
+		while (str[i])
 		{
-			if (!ft_isdigit(*args[i]) && (*args[i] != '-') && (*args[i] != '+'))
+			if ((!ft_isdigit(str[i])) && (str[i] != '-') && (str[i] != '+'))
 				return (1);
-			i += 1;
+			i ++;
 		}
 		args ++;
 	}
 	return (0);
 }
 
-int	is_sorted(char **args)
+int	is_sorted(char **args, int count)
 {
-	while (*args)
+	size_t  i;
+    size_t  y;
+
+	y = 0;
+    while (*args)
 	{
-		if (*args + 1)
+		i = 1;
+		while (i < (count - y) && *(args + i))
 		{
-			if (ft_atoi(*args) > ft_atoi(*args + 1))
-				return (0);
+			if (ft_atoi(*args) > ft_atoi(*(args+i)))
+            	return (0);
+			i += 1;
 		}
 		args += 1;
+        y += 1;
 	}
 	return (1);
 }

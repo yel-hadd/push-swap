@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:08:37 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/01/24 19:41:02 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/01/25 20:26:12 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ typedef struct s_stack
 int	ft_isdigit(int c);
 int	has_duplicates(char **args, int count);
 int	has_errors(char **args);
-int	is_sorted(char **args);
-int	ft_atoi(const char *str);
+int	is_sorted(char **args, int count);
+int	ft_atoi(char *str);
 int	ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t	ft_strlen(char *s);
 
