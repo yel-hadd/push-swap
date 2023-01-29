@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:08:37 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/01/27 18:36:21 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/01/27 20:56:30 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_stack
 {
 	int	data;
 	struct s_stack	*next;
-	size_t	position;
+	int	position;
 } t_stack;
 
 int	ft_isdigit(int c);

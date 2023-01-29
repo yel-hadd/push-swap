@@ -6,25 +6,46 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/01/27 18:58:43 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/01/29 13:07:28 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "pushswap.h"
 
+static void	add_index(t_stack **lst, t_stack **node)
+{
+	t_stack	*tmp;
+
+	if (!*lst || !lst)
+		return ;
+	tmp = *lst;
+	while (tmp)
+	{
+		if (tmp->data > (*node)->data)
+			tmp->position += 1;
+		else
+			(*node)->position += 1;
+		tmp = tmp->next;
+	}
+}
+
 static void	parse_args(t_stack **lst, char **argv)
 {
+	int	i;
+	t_stack	*node;
+
+	i = 0;
 	while (*argv)
 	{
-		ft_lstadd_back(lst, ft_lstnew(ft_atoi(*argv), 0));
+		node = ft_lstnew(ft_atoi(*argv), 0);
+		add_index(lst, &node);
+		ft_lstadd_back(lst, node);
 		argv ++;
 	}
-	get_lst_position(lst);
 	while (*lst != NULL)
 	{
-		printf("%d", (*lst)->data);
-		printf("--%zu\n", (*lst)->position);
+		printf("%d : %d\n", (*lst)->data, (*lst)->position);
 		*lst = (*lst)->next;
 	}
 }
