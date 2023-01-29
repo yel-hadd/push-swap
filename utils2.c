@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:09:31 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/01/25 20:49:43 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/01/29 16:47:44 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	has_errors(char **args)
 		str = *args;
 		while (str[i])
 		{
+			if (((str[i] == '-') || (str[i] == '+')) && !ft_isdigit(str[i+1]))
+				return (1);
 			if ((!ft_isdigit(str[i])) && (str[i] != '-') && (str[i] != '+'))
 				return (1);
 			i ++;

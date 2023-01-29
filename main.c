@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/01/29 13:07:28 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/01/29 17:10:42 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,12 @@ int main(int argc, char **argv)
 		return(0);
 	argv ++;
 	// SORTED IS NOT ERROR, SEPERATE IT
-	if (has_errors(argv) || has_duplicates(argv, argc - 1) || is_sorted(argv, argc -1))
+	if (has_errors(argv))
+		return (0);
+	if (has_duplicates(argv, argc - 1) || is_sorted(argv, argc -1))
 		return (0);
 	parse_args(&stack_a, argv);
+	ft_lstclear(&stack_a);
+	system("leaks a.out");
 }
 
