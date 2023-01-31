@@ -15,13 +15,13 @@ Push_swap is a project that involves sorting a stack of numbers using a set of i
 ## Usage
 To use push_swap, clone the repository and compile it with the following commands:
 ```bash
-git clone https://github.com/yel-hadd/push-swap
-cd push-swap
-make
+$ git clone https://github.com/yel-hadd/push-swap
+$ cd push-swap
+$ make
 ```
 Then, you can sort a stack of numbers by running the following command:
 ```bash
-./push_swap [numbers]
+$ ./push_swap [numbers]
 ```
 where [numbers] is a list of numbers to be sorted.
 ## Output
