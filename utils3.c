@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 20:41:12 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/01/29 17:12:25 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/01/29 18:23:21 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dstcpy);
 }
 
-void ft_lstclear(t_stack **lst)
+void	ft_lstclear(t_stack **lst)
 {
-   t_stack	*tmp;
-   t_stack	*head;
+	t_stack	*tmp;
+	t_stack	*head;
 
 	head = *lst;
 	while (head != NULL)

@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:08:29 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/01/25 14:39:21 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/01/30 19:08:52 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	unsigned char	*s2cpy;
 
 	if (ft_strlen((char *) s2) != n)
-        return (1);
-    i = 0;
+		return (1);
+	i = 0;
 	s1cpy = (unsigned char *)s1;
 	s2cpy = (unsigned char *)s2;
 	while (i < n)
@@ -61,8 +61,8 @@ static int	ft_isspace(char c)
 
 int	ft_atoi(char *str)
 {
-	int	result;
-	int	sign;
+	long	result;
+	long	sign;
 
 	result = 0;
 	sign = 1;
@@ -77,7 +77,13 @@ int	ft_atoi(char *str)
 	while (ft_isdigit(*str))
 	{
 		result = (result * 10) + (*str - 48);
+		if ((result > 2147483647 && sign > 0) || \
+		(result > 2147483648 && sign < 0))
+		{
+			write(1, "Error : Invalid Args\n", 21);
+			exit(1);
+		}
 		str ++;
 	}
-	return (result * sign);
+	return ((int) (result * sign));
 }
