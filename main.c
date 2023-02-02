@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/01/31 16:54:19 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/02 17:18:32 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,26 @@ static void	parse_args(t_stack **lst, char **argv)
 	}
 }
 
-static void free_2d(char **arr)
+static void	sort_filter(t_stack **a, t_stack **b, int size)
 {
-	int	i;
-
-	i = 0;
-	while(arr[i])
+	if (size <= 5)
 	{
-		free(arr[i]);
-		arr[i ++] = NULL;
+		sort_lt_5(a, b);
+		return (0);
 	}
+	else if ((size > 5) && (size < 200))
+	{
+		sort_lt_200(a, b);
+		return (0);
+	}
+	else if (size >= 200)
+	{
+		sort_gt_200(a, b);
+		return (0);		
+	}
+		return (0);
 }
+
 
 int	main(int argc, char **argv)
 {

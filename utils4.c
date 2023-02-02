@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:26:13 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/01/31 16:37:08 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:59:00 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,16 @@ void	print_stack(t_stack **lst)
 	}
 }
 
-int has_spaces(char *str)
+int	ft_lstsize(t_stack *lst)
 {
-	while (*str)
+	int	len;
+
+	len = 0;
+	while (lst)
 	{
-		if (*str == ' ')
-			return (1);
-		str ++;
+		lst = lst->next;
+		len += 1;
 	}
-	return (0);
+	return (len);
 }
 
