@@ -6,11 +6,26 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:08:29 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/01/30 19:08:52 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/02 19:30:22 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	void	*dstcpy;
+
+	dstcpy = dst;
+	if (!dst && !src)
+		return (dstcpy);
+	while ((n > 0))
+	{
+		*(char *)dst ++ = *(char *)src ++;
+		n --;
+	}
+	return (dstcpy);
+}
 
 size_t	ft_strlen(char *s)
 {
