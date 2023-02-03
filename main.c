@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/02 17:18:32 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/02 19:47:35 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,50 @@ static void	parse_args(t_stack **lst, char **argv)
 	}
 }
 
-static void	sort_filter(t_stack **a, t_stack **b, int size)
+void	sa(t_stack **a)
 {
-	if (size <= 5)
-	{
-		sort_lt_5(a, b);
-		return (0);
-	}
-	else if ((size > 5) && (size < 200))
-	{
-		sort_lt_200(a, b);
-		return (0);
-	}
-	else if (size >= 200)
-	{
-		sort_gt_200(a, b);
-		return (0);		
-	}
-		return (0);
+	t_stack	*first;
+	t_stack	*second;
+	t_stack	*tmp;
+
+	
+	first = *a;
+	second = first->next;
+
+	tmp = second->next;
+	second->next = first;
+	first->next = tmp;
+
 }
 
+void	filter_lt_6(t_stack **a, t_stack **b, int size)
+{
+	t_stack	*var;
+	(void) b;
+
+	var = *a;
+	if (size == 2)
+	{
+		if (var->next->position < var->position)
+			sa(a);
+	}
+}
+
+
+static void	master_filter(t_stack **a, t_stack **b, int size)
+{
+	if (size <= 5)
+		filter_lt_6(a, b, size);
+	// else if ((size > 5) && (size < 200))
+	// 	filter_lt_200(a, b, size);
+	// else if (size >= 200)
+	// 	filter_gt_200(a, b, size);
+}
 
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
+	t_stack	*stack_b;
 	int		fr;
 
 	fr = 0;
@@ -70,6 +90,7 @@ int	main(int argc, char **argv)
 	if (is_sorted(argv, argc -1))
 		return (write(1, "Already Sorted !\n", 18), 0);
 	parse_args(&stack_a, argv);
+	master_filter(&stack_a, &stack_b, ft_lstsize(stack_a));
 	print_stack(&stack_a);
 	if (fr)
 		free_2d(argv);
