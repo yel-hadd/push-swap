@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:26:13 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/02 15:59:00 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/03 19:00:54 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@ void	print_stack(t_stack **lst)
 	{
 		printf("%d : %d\n", tmp->data, tmp->position);
 		tmp = tmp->next;
+	}
+}
+
+void free_2d(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while(arr[i])
+	{
+		free(arr[i]);
+		arr[i ++] = NULL;
 	}
 }
 
