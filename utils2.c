@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:09:31 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/01/31 16:35:50 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/03 19:00:19 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,15 @@ int	is_sorted(char **args, int count)
 		y += 1;
 	}
 	return (1);
+}
+
+int has_spaces(char *str)
+{
+	while (*str)
+	{
+		if (*str == ' ')
+			return (1);
+		str ++;
+	}
+	return (0);
 }
