@@ -6,31 +6,38 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:57:34 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/02 16:01:19 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/03 22:09:01 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int has_spaces(char *str)
+void	swap(t_stack **a, char stack)
 {
-	while (*str)
-	{
-		if (*str == ' ')
-			return (1);
-		str ++;
-	}
-	return (0);
+	t_stack	*var;
+
+	var = (*a)->next;
+	(*a)->next = var->next;
+	var->next = *a;
+	*a = var;
+	write(1, "s", 1);
+	write(1, &stack, 1);
+	write(1, "\n", 1);
 }
 
-void free_2d(char **arr)
+void	reverse_rotate(t_stack **a, char stack)
 {
-	int	i;
+	t_stack	*bf_last;
 
-	i = 0;
-	while(arr[i])
-	{
-		free(arr[i]);
-		arr[i ++] = NULL;
-	}
+	if (*a == NULL)
+		return ;
+	if ((*a)->next == NULL)
+		return ;
+	bf_last = ft_before_last(*a);
+	bf_last->next->next = *a;
+	*a = bf_last->next;
+	bf_last->next = NULL;
+	write(1, "rr", 2);
+	write(1, &stack, 1);
+	write(1, "\n", 1);
 }
