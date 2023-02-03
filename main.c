@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/02 19:47:35 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/03 23:38:33 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,33 +27,38 @@ static void	parse_args(t_stack **lst, char **argv)
 	}
 }
 
-void	sa(t_stack **a)
+void	sort_three(t_stack **a)
 {
-	t_stack	*first;
-	t_stack	*second;
-	t_stack	*tmp;
+	t_stack	*var;
 
-	
-	first = *a;
-	second = first->next;
-
-	tmp = second->next;
-	second->next = first;
-	first->next = tmp;
-
+	var = *a;
+	if (var->next->position < var->position < ft_lstlast(var)->position)
+		swap(a, 'a');
+	else if (ft_lstlast(var)->position < var->next->position < var->position)
+	{
+		swap(a, 'a');
+		reverse_rotate(a, 'a');
+	}
+	else if (var->next->position < ft_lstlast(var)->position < var->position)
+		rotate(a, 'a');
+	else if (var->position < ft_lstlast(var)->position < var->next->position)
+	{
+		swap(a, 'a');
+		rotate(a, 'a');
+	}
+	else if (ft_lstlast(var)->position < var->position < var->next->position)
+		reverse_rotate(a, 'a');
 }
 
 void	filter_lt_6(t_stack **a, t_stack **b, int size)
 {
-	t_stack	*var;
-	(void) b;
+	(void)	b;
 
-	var = *a;
 	if (size == 2)
-	{
-		if (var->next->position < var->position)
-			sa(a);
-	}
+		swap(a, 'a');
+	else if (size == 3)
+		sort_three(a);
+
 }
 
 
@@ -95,5 +100,5 @@ int	main(int argc, char **argv)
 	if (fr)
 		free_2d(argv);
 	ft_lstclear(&stack_a);
-	system("leaks a.out");
+	// system("leaks a.out");
 }
