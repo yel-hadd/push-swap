@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 15:57:34 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/03 22:09:01 by yel-hadd         ###   ########.fr       */
+/*   Created: 2023/02/04 20:14:13 by yel-hadd          #+#    #+#             */
+/*   Updated: 2023/02/04 20:36:40 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,27 @@ void	reverse_rotate(t_stack **a, char stack)
 	*a = bf_last->next;
 	bf_last->next = NULL;
 	write(1, "rr", 2);
+	write(1, &stack, 1);
+	write(1, "\n", 1);
+}
+
+void	rotate(t_stack **a, char stack)
+{
+	t_stack	*bf_last;
+	t_stack	*first;
+	t_stack	*last;
+
+	if (*a == NULL)
+		return ;
+	if ((*a)->next == NULL)
+		return ;
+	bf_last = ft_before_last(*a);
+	first = *a;
+	last = ft_lstlast(*a);
+	last->next = first;
+	first->next = NULL;
+	*a = bf_last;
+	write(1, "r", 1);
 	write(1, &stack, 1);
 	write(1, "\n", 1);
 }

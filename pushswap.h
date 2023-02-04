@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:08:37 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/03 21:58:37 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/04 23:52:28 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	reverse_rotate(t_stack **a, char stack);
 int		has_duplicates(char **args, int count);
 int		is_sorted(char **args, int count);
 void	get_lst_position(t_stack **lst);
+void	rotate(t_stack **a, char stack);
 void	swap(t_stack **a, char stack);
 t_stack *ft_before_last(t_stack *a);
 char	**ft_split(char *s, char c);
@@ -40,6 +41,7 @@ void	print_stack(t_stack **lst);
 t_stack	*ft_lstlast(t_stack *lst);
 int		ft_lstsize(t_stack *lst);
 int		has_errors(char **args);
+void	sort_three(t_stack **a);
 int		has_spaces(char *str);
 void 	free_2d(char **arr);
 size_t	ft_strlen(char *s);

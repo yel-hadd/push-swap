@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/03 23:38:33 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/04 23:54:49 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,49 +27,22 @@ static void	parse_args(t_stack **lst, char **argv)
 	}
 }
 
-void	sort_three(t_stack **a)
+void	sort_four(t_stack **a, t_stack **b)
 {
-	t_stack	*var;
 
-	var = *a;
-	if (var->next->position < var->position < ft_lstlast(var)->position)
-		swap(a, 'a');
-	else if (ft_lstlast(var)->position < var->next->position < var->position)
-	{
-		swap(a, 'a');
-		reverse_rotate(a, 'a');
-	}
-	else if (var->next->position < ft_lstlast(var)->position < var->position)
-		rotate(a, 'a');
-	else if (var->position < ft_lstlast(var)->position < var->next->position)
-	{
-		swap(a, 'a');
-		rotate(a, 'a');
-	}
-	else if (ft_lstlast(var)->position < var->position < var->next->position)
-		reverse_rotate(a, 'a');
 }
 
-void	filter_lt_6(t_stack **a, t_stack **b, int size)
+static void	master_filter(t_stack **a, t_stack **b, int size)
 {
-	(void)	b;
-
+	(void) b;
 	if (size == 2)
 		swap(a, 'a');
 	else if (size == 3)
 		sort_three(a);
-
-}
-
-
-static void	master_filter(t_stack **a, t_stack **b, int size)
-{
-	if (size <= 5)
-		filter_lt_6(a, b, size);
-	// else if ((size > 5) && (size < 200))
-	// 	filter_lt_200(a, b, size);
-	// else if (size >= 200)
-	// 	filter_gt_200(a, b, size);
+	else if (size == 4)
+		sort_four(a, b);
+	// else if (size == 5)
+	// 	sort_five(a);
 }
 
 int	main(int argc, char **argv)
