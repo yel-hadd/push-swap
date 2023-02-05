@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 20:14:13 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/04 20:36:40 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/05 02:19:07 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	reverse_rotate(t_stack **a, char stack)
 	write(1, &stack, 1);
 	write(1, "\n", 1);
 }
-
+// TODO: FIx Bug in rotate
 void	rotate(t_stack **a, char stack)
 {
 	t_stack	*bf_last;

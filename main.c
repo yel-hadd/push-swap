@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/04 23:54:49 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/05 02:21:01 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,52 @@ static void	parse_args(t_stack **lst, char **argv)
 	}
 }
 
+/*
+Take the first element at the top of source and put it at the top of the destination (dest).
+Do nothing if source is empty.
+
+If stack == a : print "pa" on stdout (push a)
+If stack == b : print "pb" on stdout (push b)
+*/
+void	push(t_stack **dest, t_stack **source, char stack)
+{
+	t_stack	*node;
+
+	node = (*source)->next;
+	ft_lstadd_front(dest, *source);
+	*source = node;
+	write(1, "p", 1);
+	write(1, &stack, 1);
+	write(1, "\n", 1);
+}
+
 void	sort_four(t_stack **a, t_stack **b)
 {
+	t_stack	*var;
+	int		where;
 
+	(void) b;
+	var = *a;
+	where = top_or_buttom(*a);
+	printf("%d\n", where);
+	// if (where)
+	// 	rotate(a, 'a');
+	// else
+	while (where == 0 && var->position != 0)
+	{
+		reverse_rotate(a, 'a');
+		var = *a;
+	}
+	// TODO: FIx Bug in rotate
+	while (where == 1 && var->position != 0)
+	{
+		rotate(a, 'a');
+		var = *a;
+	}
+	// TODO: FIx Bug in push
+	push(b, a, 'b');
+	sort_three(a);
+	push(a, b, 'a');
 }
 
 static void	master_filter(t_stack **a, t_stack **b, int size)
@@ -52,6 +95,7 @@ int	main(int argc, char **argv)
 	int		fr;
 
 	fr = 0;
+	stack_b = NULL;
 	if (argc == 1)
 		return (0);
 	if (argc == 2 && has_spaces(argv[1]))
@@ -65,11 +109,14 @@ int	main(int argc, char **argv)
 		return (write(1, "Error : Invalid Args\n", 21), 0);
 	if (has_duplicates(argv, argc - 1))
 		return (write(1, "Error : Duplicate Args\n", 24), 0);
+	// TODO: fix is_sorted bug : false positives when argc = 1
 	if (is_sorted(argv, argc -1))
 		return (write(1, "Already Sorted !\n", 18), 0);
 	parse_args(&stack_a, argv);
 	master_filter(&stack_a, &stack_b, ft_lstsize(stack_a));
 	print_stack(&stack_a);
+	printf("\n------\n");
+	print_stack(&stack_b);
 	if (fr)
 		free_2d(argv);
 	ft_lstclear(&stack_a);

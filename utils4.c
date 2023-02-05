@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:26:13 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/03 19:00:54 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/05 02:03:21 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	print_stack(t_stack **lst)
 {
 	t_stack	*tmp;
 
+	if (!*lst)
+		return ;
 	tmp = *lst;
 	while (tmp)
 	{
@@ -66,3 +68,8 @@ int	ft_lstsize(t_stack *lst)
 	return (len);
 }
 
+void	ft_lstadd_front(t_stack **lst, t_stack *new)
+{
+	new->next = *lst;
+	*lst = new;
+}
