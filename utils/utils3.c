@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
+#include "../pushswap.h"
 
 t_stack	*ft_lstnew(int content, size_t position)
 {

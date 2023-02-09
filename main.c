@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/05 02:21:01 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/10 00:26:02 by anaciri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 static void	parse_args(t_stack **lst, char **argv)
 {
 	t_stack	*node;
-	int		i;
 
-	i = 0;
 	while (*argv)
 	{
 		node = ft_lstnew(ft_atoi(*argv), 0);
@@ -82,8 +80,8 @@ static void	master_filter(t_stack **a, t_stack **b, int size)
 		swap(a, 'a');
 	else if (size == 3)
 		sort_three(a);
-	else if (size == 4)
-		sort_four(a, b);
+	// else if (size == 4)
+	// 	sort_four(a, b);
 	// else if (size == 5)
 	// 	sort_five(a);
 }
@@ -95,6 +93,7 @@ int	main(int argc, char **argv)
 	int		fr;
 
 	fr = 0;
+	stack_a = NULL;
 	stack_b = NULL;
 	if (argc == 1)
 		return (0);
@@ -115,10 +114,10 @@ int	main(int argc, char **argv)
 	parse_args(&stack_a, argv);
 	master_filter(&stack_a, &stack_b, ft_lstsize(stack_a));
 	print_stack(&stack_a);
-	printf("\n------\n");
-	print_stack(&stack_b);
-	if (fr)
-		free_2d(argv);
-	ft_lstclear(&stack_a);
+//	printf("\n------\n");
+//	//print_stack(&stack_b);
+//	if (fr)
+//		free_2d(argv);
+//	ft_lstclear(&stack_a);
 	// system("leaks a.out");
 }

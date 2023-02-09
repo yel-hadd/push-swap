@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
+#include "../pushswap.h"
 
 void	sort_three(t_stack **a)
 {
@@ -21,20 +21,20 @@ void	sort_three(t_stack **a)
     first = (*a)->position;
     middle = (*a)->next->position;
     last = ft_lstlast(*a)->position;
-	if (last > first > middle)
+	if (last > first && first > middle)
 		swap(a, 'a');
-	else if (first > middle > last)
+	else if (first > middle && middle > last)
 	{
 		swap(a, 'a');
 		reverse_rotate(a, 'a');
 	}
-	else if (first > last > middle)
+	else if (first > last && last > middle)
 		rotate(a, 'a');
-	else if (middle > last > first)
+	else if (middle > last && last > first)
 	{
 		swap(a, 'a');
 		rotate(a, 'a');
 	}
-	else if (middle > first > last)
+	else if (middle > first && first > last)
 		reverse_rotate(a, 'a');
 }
