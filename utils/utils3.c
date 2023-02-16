@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 20:41:12 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/05 02:11:09 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:25:28 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ Return value:
 0 => buttom
 */
 
-int	top_or_buttom(t_stack *stack)
+int	top_or_buttom(t_stack *stack, int position)
 {
     t_stack *var;
 	int		index;
@@ -92,7 +92,7 @@ int	top_or_buttom(t_stack *stack)
 	size = ft_lstsize(stack);
     var = stack;
 	index = 1;
-    while (var->position != 0)
+    while (var->position != position)
 	{
 		index += 1;
 		var = var->next;

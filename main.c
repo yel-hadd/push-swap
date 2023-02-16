@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/10 00:26:02 by anaciri          ###   ########.fr       */
+/*   Updated: 2023/02/16 18:41:40 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,51 +25,24 @@ static void	parse_args(t_stack **lst, char **argv)
 	}
 }
 
-/*
-Take the first element at the top of source and put it at the top of the destination (dest).
-Do nothing if source is empty.
-
-If stack == a : print "pa" on stdout (push a)
-If stack == b : print "pb" on stdout (push b)
-*/
-void	push(t_stack **dest, t_stack **source, char stack)
+void	sort_five(t_stack **a, t_stack **b)
 {
-	t_stack	*node;
+	int	where;
 
-	node = (*source)->next;
-	ft_lstadd_front(dest, *source);
-	*source = node;
-	write(1, "p", 1);
-	write(1, &stack, 1);
-	write(1, "\n", 1);
-}
-
-void	sort_four(t_stack **a, t_stack **b)
-{
-	t_stack	*var;
-	int		where;
-
-	(void) b;
-	var = *a;
-	where = top_or_buttom(*a);
-	printf("%d\n", where);
-	// if (where)
-	// 	rotate(a, 'a');
-	// else
-	while (where == 0 && var->position != 0)
-	{
+	where = top_or_buttom(*a, 0);
+	while (where == 0 && (*a)->position != 0)
 		reverse_rotate(a, 'a');
-		var = *a;
-	}
-	// TODO: FIx Bug in rotate
-	while (where == 1 && var->position != 0)
-	{
+	while (where == 1 && (*a)->position != 0)
 		rotate(a, 'a');
-		var = *a;
-	}
-	// TODO: FIx Bug in push
+	push(b, a, 'b');
+	where = top_or_buttom(*a, 1);
+	while (where == 0 && (*a)->position != 1)
+		reverse_rotate(a, 'a');
+	while (where == 1 && (*a)->position != 1)
+		rotate(a, 'a');
 	push(b, a, 'b');
 	sort_three(a);
+	push(a, b, 'a');
 	push(a, b, 'a');
 }
 
@@ -80,10 +53,10 @@ static void	master_filter(t_stack **a, t_stack **b, int size)
 		swap(a, 'a');
 	else if (size == 3)
 		sort_three(a);
-	// else if (size == 4)
-	// 	sort_four(a, b);
-	// else if (size == 5)
-	// 	sort_five(a);
+	else if (size == 4)
+		sort_four(a, b);
+	else if (size == 5)
+		sort_five(a, b);
 }
 
 int	main(int argc, char **argv)

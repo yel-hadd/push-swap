@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 20:14:13 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/05 02:19:07 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:12:39 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,32 @@ void	reverse_rotate(t_stack **a, char stack)
 // TODO: FIx Bug in rotate
 void	rotate(t_stack **a, char stack)
 {
-	t_stack	*bf_last;
-	t_stack	*first;
-	t_stack	*last;
+	t_stack	*node;
 
 	if (*a == NULL)
 		return ;
 	if ((*a)->next == NULL)
 		return ;
-	bf_last = ft_before_last(*a);
-	first = *a;
-	last = ft_lstlast(*a);
-	last->next = first;
-	first->next = NULL;
-	*a = bf_last;
+	node = *a;
+	*a = (*a)->next;
+	node->next = NULL;
+	ft_lstlast(*a)->next = node;
 	write(1, "r", 1);
+	write(1, &stack, 1);
+	write(1, "\n", 1);
+}
+
+void	push(t_stack **dest, t_stack **source, char stack)
+{
+	t_stack	*node;
+
+	if (*source == NULL)
+		return ;
+	node = *source;
+	*source = (*source)->next;
+	node->next = *dest;
+	*dest = node;
+	write(1, "p", 1);
 	write(1, &stack, 1);
 	write(1, "\n", 1);
 }
