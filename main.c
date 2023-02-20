@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/16 18:41:40 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/21 00:45:39 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,9 @@ static void	parse_args(t_stack **lst, char **argv)
 	}
 }
 
-void	sort_five(t_stack **a, t_stack **b)
+void	sort_lt_200(t_stack **a, t_stack **b, int size)
 {
-	int	where;
-
-	where = top_or_buttom(*a, 0);
-	while (where == 0 && (*a)->position != 0)
-		reverse_rotate(a, 'a');
-	while (where == 1 && (*a)->position != 0)
-		rotate(a, 'a');
-	push(b, a, 'b');
-	where = top_or_buttom(*a, 1);
-	while (where == 0 && (*a)->position != 1)
-		reverse_rotate(a, 'a');
-	while (where == 1 && (*a)->position != 1)
-		rotate(a, 'a');
-	push(b, a, 'b');
-	sort_three(a);
-	push(a, b, 'a');
-	push(a, b, 'a');
+	
 }
 
 static void	master_filter(t_stack **a, t_stack **b, int size)
@@ -57,6 +41,8 @@ static void	master_filter(t_stack **a, t_stack **b, int size)
 		sort_four(a, b);
 	else if (size == 5)
 		sort_five(a, b);
+	else if (size > 5 && size < 200)
+		sort_lt_200(a, b, size);
 }
 
 int	main(int argc, char **argv)

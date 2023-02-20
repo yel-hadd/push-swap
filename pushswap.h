@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:08:37 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/16 18:26:20 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/21 00:44:52 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	add_index(t_stack **lst, t_stack **node);
 void	reverse_rotate(t_stack **a, char stack);
 int		has_duplicates(char **args, int count);
 void	sort_four(t_stack **a, t_stack **b);
+void	sort_five(t_stack **a, t_stack **b);
 int		is_sorted(char **args, int count);
 void	get_lst_position(t_stack **lst);
 void	rotate(t_stack **a, char stack);
