@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/21 06:18:57 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:23:38 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,35 +25,39 @@ static void	parse_args(t_stack **lst, char **argv)
 	}
 }
 
-void	push_chunk(t_stack **a, t_stack **b, int chunk_size, int stop)
+void	push_chunk(t_stack **a, t_stack **b, int start, int stop)
 {
-	int	i;
-
-	i = 0;
-	while (i < chunk_size)
+	while (start <= stop)
 	{
-		while ((*a)->position > stop-1)
+		while ((*a)->position > stop)
 			rotate(a, 'a');
-		if ((*a)->position <= ((stop-1) / 2))
+		if ((*a)->position <= (stop / 2))
 			push(b, a, 'b');
 		else
 		{
 			push(b, a, 'b');
 			rotate(b, 'b');
 		}
-		i ++;
+		start ++;
 	}
 }
 
 void	sort_lt_200(t_stack **a, t_stack **b, int size)
 {
 	int	i;
+	int	start;
+	int	stop;
 
 	i = 1;
-	printf("\ng%dg\n", size);
+	start = 0;
 	while (i < 6)
 	{
-		push_chunk(a, b, (size/5), ((size/5) * i));
+		if (i == 5)
+			stop = size;
+		else
+			stop = ((size / 5) * i) - 1;
+		push_chunk(a, b, start, stop);
+		start = stop + 1;
 		i ++;
 	}
 }
