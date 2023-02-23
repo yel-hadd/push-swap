@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/21 16:23:38 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/23 03:08:20 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,19 @@ static void	parse_args(t_stack **lst, char **argv)
 	}
 }
 
-void	push_chunk(t_stack **a, t_stack **b, int start, int stop)
+void	push_chunk(t_stack **a, t_stack **b, int start, int stop, int size)
 {
-	while (start <= stop)
+	int	i;
+	int m;
+
+	i = start;
+	while (i <= stop)
 	{
-		while ((*a)->position > stop)
-			rotate(a, 'a');
+		if (size != stop)
+		{
+			while (((*a)->position < start) || ((*a)->position > stop))
+				rotate(a, 'a');
+		}
 		if ((*a)->position <= (stop / 2))
 			push(b, a, 'b');
 		else
@@ -38,7 +45,7 @@ void	push_chunk(t_stack **a, t_stack **b, int start, int stop)
 			push(b, a, 'b');
 			rotate(b, 'b');
 		}
-		start ++;
+		i ++;
 	}
 }
 
@@ -50,14 +57,20 @@ void	sort_lt_200(t_stack **a, t_stack **b, int size)
 
 	i = 1;
 	start = 0;
-	while (i < 6)
+	while (i <= 5)
 	{
 		if (i == 5)
+		{
 			stop = size;
+			push_chunk(a, b, start, stop, size);
+			return ;
+		}
 		else
-			stop = ((size / 5) * i) - 1;
-		push_chunk(a, b, start, stop);
-		start = stop + 1;
+		{
+			stop = (((size / 5) * i) - 1);
+			push_chunk(a, b, start, stop, size);
+			start = stop + 1;
+		}
 		i ++;
 	}
 }
