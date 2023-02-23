@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/23 03:08:20 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/23 18:04:20 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,33 @@ static void	parse_args(t_stack **lst, char **argv)
 	}
 }
 
-void	push_chunk(t_stack **a, t_stack **b, int start, int stop, int size)
+void push_chunk(t_stack **a, t_stack **b, int start, int stop)
 {
-	int	i;
-	int m;
+	int	s;
+	int	half;
 
-	i = start;
-	while (i <= stop)
+	s = start;
+	if(!*a)
+		return ;
+	while (s <= stop)
 	{
-		if (size != stop)
+		if (ft_lstsize(*a) > 0)
 		{
-			while (((*a)->position < start) || ((*a)->position > stop))
+			while ((*a)->position < start || (*a)->position > stop)
 				rotate(a, 'a');
+			half = stop / 2; 
+			if ((*a)->position <= half)
+			{
+				push(b, a, 'b');
+			}
+			else if((*a)->position > half)
+			{
+				push(b, a, 'b');
+				if ((*a)->position > (*b)->position)
+					rotate(b, 'b');
+			}
 		}
-		if ((*a)->position <= (stop / 2))
-			push(b, a, 'b');
-		else
-		{
-			push(b, a, 'b');
-			rotate(b, 'b');
-		}
-		i ++;
+		s ++;
 	}
 }
 
@@ -62,13 +68,13 @@ void	sort_lt_200(t_stack **a, t_stack **b, int size)
 		if (i == 5)
 		{
 			stop = size;
-			push_chunk(a, b, start, stop, size);
+			push_chunk(a, b, start, stop);
 			return ;
 		}
 		else
 		{
 			stop = (((size / 5) * i) - 1);
-			push_chunk(a, b, start, stop, size);
+			push_chunk(a, b, start, stop);
 			start = stop + 1;
 		}
 		i ++;
@@ -117,7 +123,7 @@ int	main(int argc, char **argv)
 		return (write(1, "Already Sorted !\n", 18), 0);
 	parse_args(&stack_a, argv);
 	master_filter(&stack_a, &stack_b, ft_lstsize(stack_a));
-	print_stack(&stack_a);
+	//print_stack(&stack_b);
 //	printf("\n------\n");
 //	//print_stack(&stack_b);
 //	if (fr)
