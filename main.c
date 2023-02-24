@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/23 18:04:20 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/24 19:14:02 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void push_chunk(t_stack **a, t_stack **b, int start, int stop)
 	int	half;
 
 	s = start;
-	if(!*a)
-		return ;
 	while (s <= stop)
 	{
 		if (ft_lstsize(*a) > 0)
@@ -41,13 +39,11 @@ void push_chunk(t_stack **a, t_stack **b, int start, int stop)
 				rotate(a, 'a');
 			half = stop / 2; 
 			if ((*a)->position <= half)
-			{
 				push(b, a, 'b');
-			}
 			else if((*a)->position > half)
 			{
 				push(b, a, 'b');
-				if ((*a)->position > (*b)->position)
+				if ((*b)->position > ft_lstlast(*b)->position)
 					rotate(b, 'b');
 			}
 		}
@@ -55,7 +51,22 @@ void push_chunk(t_stack **a, t_stack **b, int start, int stop)
 	}
 }
 
-void	sort_lt_200(t_stack **a, t_stack **b, int size)
+void	push_back(t_stack **a, t_stack **b, int max)
+{
+	int where;
+
+	while (-- max >= 0)
+	{
+		where = top_or_buttom(*b, max);
+		while (where == 0 && (*b)->position != max)
+			reverse_rotate(b, 'b');
+		while (where == 1 && (*b)->position != max)
+			rotate(b, 'b');
+		push(a, b, 'a');
+	}
+}
+
+void	sort_gt_five(t_stack **a, t_stack **b, int divide, int size)
 {
 	int	i;
 	int	start;
@@ -63,9 +74,9 @@ void	sort_lt_200(t_stack **a, t_stack **b, int size)
 
 	i = 1;
 	start = 0;
-	while (i <= 5)
+	while (i <= divide)
 	{
-		if (i == 5)
+		if (i == divide)
 		{
 			stop = size;
 			push_chunk(a, b, start, stop);
@@ -73,7 +84,7 @@ void	sort_lt_200(t_stack **a, t_stack **b, int size)
 		}
 		else
 		{
-			stop = (((size / 5) * i) - 1);
+			stop = (((size / divide) * i) - 1);
 			push_chunk(a, b, start, stop);
 			start = stop + 1;
 		}
@@ -93,7 +104,15 @@ static void	master_filter(t_stack **a, t_stack **b, int size)
 	else if (size == 5)
 		sort_five(a, b);
 	else if (size > 5 && size < 200)
-		sort_lt_200(a, b, size);
+	{
+		sort_gt_five(a, b, 5, size);
+		push_back(a, b, size);
+	}
+	else if (size >= 200)
+	{
+		sort_gt_five(a, b, 10, size);
+		push_back(a, b, size);
+	}
 }
 
 int	main(int argc, char **argv)
