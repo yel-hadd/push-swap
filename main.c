@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/28 17:31:09 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/28 18:10:46 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,27 +91,26 @@ static void	master_filter(t_stack **a, t_stack **b, int size)
 
 char	**append(char **dest, char **src)
 {
-	int		i;
-	int		j;
+	size_t		s;
+	size_t		d;
+	size_t		y;
 	char	**new;
 	char	**tmp;
 
-	i = 0;
-	while (src[i])
-		i ++;
-	j = 0;
-	while (dest && dest[j])
-		j ++;
-	new = (char **) calloc((i + j + 1), sizeof(char **));
-	i = 0;
+	d = 0;
+	s = 0;
+	while (dest != NULL && dest[d])
+		d ++;
+	while (src[s])
+		s ++;
+	new = ft_calloc((s + d), sizeof(char *));
+	y = 0;
 	tmp = dest;
-	while (dest && *dest)
-		new[i++] = ft_strdup(*dest ++);
+	while (y <= d && d != 0)
+		new[y ++] = ft_strdup(*dest++);
 	free_2d(tmp);
-	tmp = src;
-	while (*src)
-		new[i++] = ft_strdup(*src ++);
-	free_2d(tmp);	
+	while (y <= s && s != 0)
+		new[y ++] = ft_strdup(*src++);
 	return (new);
 }
 
@@ -120,6 +119,7 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 	char	**args;
+	char	**tmp;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -127,14 +127,14 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	while (argv)
-		args = append(args, ft_split(*++argv, ' '));
+	{
+		tmp = ft_split(*argv, ' ');
+		args = append(args, tmp);
+		free_2d(tmp);
+		argv ++;
+	}
 	if (has_errors(args))
 		return (write(1, "Error : Invalid Args\n", 21), 0);
-	if (has_duplicates(args, argc - 1))
-		return (write(1, "Error : Duplicate Args\n", 24), 0);
-	// TODO: fix is_sorted bug : false positives when argc = 1
-	if (is_sorted(args, argc -1))
-		return (write(1, "Already Sorted !\n", 18), 0);
 	parse_args(&stack_a, args);
 	master_filter(&stack_a, &stack_b, ft_lstsize(stack_a));
 	//print_stack(&stack_b);
