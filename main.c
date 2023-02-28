@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/24 19:14:02 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:31:09 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,6 @@ static void	parse_args(t_stack **lst, char **argv)
 		add_index(lst, &node);
 		ft_lstadd_back(lst, node);
 		argv ++;
-	}
-}
-
-void push_chunk(t_stack **a, t_stack **b, int start, int stop)
-{
-	int	s;
-	int	half;
-
-	s = start;
-	while (s <= stop)
-	{
-		if (ft_lstsize(*a) > 0)
-		{
-			while ((*a)->position < start || (*a)->position > stop)
-				rotate(a, 'a');
-			half = stop / 2; 
-			if ((*a)->position <= half)
-				push(b, a, 'b');
-			else if((*a)->position > half)
-			{
-				push(b, a, 'b');
-				if ((*b)->position > ft_lstlast(*b)->position)
-					rotate(b, 'b');
-			}
-		}
-		s ++;
 	}
 }
 
@@ -115,32 +89,53 @@ static void	master_filter(t_stack **a, t_stack **b, int size)
 	}
 }
 
+char	**append(char **dest, char **src)
+{
+	int		i;
+	int		j;
+	char	**new;
+	char	**tmp;
+
+	i = 0;
+	while (src[i])
+		i ++;
+	j = 0;
+	while (dest && dest[j])
+		j ++;
+	new = (char **) calloc((i + j + 1), sizeof(char **));
+	i = 0;
+	tmp = dest;
+	while (dest && *dest)
+		new[i++] = ft_strdup(*dest ++);
+	free_2d(tmp);
+	tmp = src;
+	while (*src)
+		new[i++] = ft_strdup(*src ++);
+	free_2d(tmp);	
+	return (new);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
-	int		fr;
+	char	**args;
 
-	fr = 0;
 	stack_a = NULL;
 	stack_b = NULL;
+	args = NULL;
 	if (argc == 1)
 		return (0);
-	if (argc == 2 && has_spaces(argv[1]))
-	{
-		argv = ft_split(argv[1], ' ');
-		fr = 1;
-	}
-	else
-		argv ++;
-	if (has_errors(argv))
+	while (argv)
+		args = append(args, ft_split(*++argv, ' '));
+	if (has_errors(args))
 		return (write(1, "Error : Invalid Args\n", 21), 0);
-	if (has_duplicates(argv, argc - 1))
+	if (has_duplicates(args, argc - 1))
 		return (write(1, "Error : Duplicate Args\n", 24), 0);
 	// TODO: fix is_sorted bug : false positives when argc = 1
-	if (is_sorted(argv, argc -1))
+	if (is_sorted(args, argc -1))
 		return (write(1, "Already Sorted !\n", 18), 0);
-	parse_args(&stack_a, argv);
+	parse_args(&stack_a, args);
 	master_filter(&stack_a, &stack_b, ft_lstsize(stack_a));
 	//print_stack(&stack_b);
 //	printf("\n------\n");

@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:08:37 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/21 00:44:52 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:20:11 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct	s_stack
 	int	position;
 } t_stack;
 
+void	push_chunk(t_stack **a, t_stack **b, int start, int stop);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	push(t_stack **dest, t_stack **source, char stack);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
@@ -33,6 +34,8 @@ t_stack	*ft_lstnew(int content, size_t position);
 void	add_index(t_stack **lst, t_stack **node);
 void	reverse_rotate(t_stack **a, char stack);
 int		has_duplicates(char **args, int count);
+void	*ft_memset(void *b, int c, size_t len);
+void	*ft_calloc(size_t count, size_t size);
 void	sort_four(t_stack **a, t_stack **b);
 void	sort_five(t_stack **a, t_stack **b);
 int		is_sorted(char **args, int count);
@@ -42,7 +45,9 @@ void	swap(t_stack **a, char stack);
 t_stack *ft_before_last(t_stack *a);
 char	**ft_split(char *s, char c);
 void	ft_lstclear(t_stack **head);
+void	ft_bzero(void *s, size_t n);
 void	print_stack(t_stack **lst);
+char	*ft_strdup(char *s1);
 t_stack	*ft_lstlast(t_stack *lst);
 int		ft_lstsize(t_stack *lst);
 int		has_errors(char **args);

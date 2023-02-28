@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:26:13 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/23 15:58:33 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:32:03 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,14 @@ void free_2d(char **arr)
 {
 	int	i;
 
-	i = 0;
-	while(arr[i])
+	if (arr)
 	{
-		free(arr[i]);
-		arr[i ++] = NULL;
+		i = 0;
+		while(arr[i])
+		{
+			free(arr[i]);
+			arr[i ++] = NULL;
+		}
 	}
 }
 
