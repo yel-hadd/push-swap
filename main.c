@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/28 18:10:46 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/02/28 18:16:05 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	sort_gt_five(t_stack **a, t_stack **b, int divide, int size)
 
 	i = 1;
 	start = 0;
-	while (i <= divide)
+	while (i <= 5)
 	{
-		if (i == divide)
+		if (i == 5)
 		{
 			stop = size;
 			push_chunk(a, b, start, stop);
@@ -58,7 +58,7 @@ void	sort_gt_five(t_stack **a, t_stack **b, int divide, int size)
 		}
 		else
 		{
-			stop = (((size / divide) * i) - 1);
+			stop = (((size / 5) * i) - 1);
 			push_chunk(a, b, start, stop);
 			start = stop + 1;
 		}
@@ -78,15 +78,7 @@ static void	master_filter(t_stack **a, t_stack **b, int size)
 	else if (size == 5)
 		sort_five(a, b);
 	else if (size > 5 && size < 200)
-	{
-		sort_gt_five(a, b, 5, size);
-		push_back(a, b, size);
-	}
-	else if (size >= 200)
-	{
-		sort_gt_five(a, b, 10, size);
-		push_back(a, b, size);
-	}
+		sort_lt_200(a, b, size);
 }
 
 char	**append(char **dest, char **src)
