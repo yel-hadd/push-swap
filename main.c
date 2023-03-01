@@ -6,23 +6,121 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/28 18:16:05 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:17:59 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-static void	parse_args(t_stack **lst, char **argv)
+int	has_empty_arg(int argc, char **argv)
+{
+	int	i;
+
+	i = -1;
+	while (++i < argc)
+	{
+		if (ft_strlen(argv[i]) == 0)
+			return (1);
+	}
+	return (0);
+}
+
+int	has_errors(char **string)
+{
+	char	**arr;
+	char	*tmp;
+
+	arr = string;
+	while (*arr)
+	{
+		tmp = *arr;
+		while (*tmp)
+		{
+			if (!ft_isdigit(*tmp) && *tmp != '+' && *tmp != '-')
+				return (1);
+			tmp ++;
+		}
+		arr ++;
+	}
+	return (1);
+}
+
+
+int	parse_args(t_stack **lst, char **argv)
 {
 	t_stack	*node;
+	char	**tmp;
+	int		i;
 
 	while (*argv)
 	{
-		node = ft_lstnew(ft_atoi(*argv), 0);
-		add_index(lst, &node);
-		ft_lstadd_back(lst, node);
+		tmp = ft_split(*argv, ' ');
+		if (has_errors(tmp))
+			return (0);
+		printf("%s", *tmp);
+		exit(0);
+		i = 0;
+		while (tmp[i])
+		{
+			node = ft_lstnew(tmp[i], ft_atoi(tmp[i]), 0);
+			add_index(lst, &node);
+			ft_lstadd_back(lst, node);
+			i ++;
+		}
+		free_2d(tmp);
 		argv ++;
 	}
+	return (1);
+}
+
+int	is_unique(t_stack **lst)
+{
+	t_stack	*tmp;
+	t_stack	*node;
+
+	tmp = *lst;
+	while (tmp != NULL)
+	{
+		node = tmp->next;
+		while (node != NULL)
+		{
+			if (tmp->data == node->data)
+				return (0);
+			node = node->next;
+		}
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
+int	valid_zero(char *str)
+{
+	int	i;
+
+	i = 1;
+	if (str[0] != '0' && str[0] != '-' && str[0] != '+')
+		return (0);
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i ++;
+	}
+	return (1);
+}
+
+int	is_convertible(t_stack **lst)
+{
+	t_stack	*tmp;
+
+	tmp = *lst;
+	while (tmp != NULL)
+	{
+		if ((tmp->data == 0 && !valid_zero(tmp->init)))
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
 }
 
 void	push_back(t_stack **a, t_stack **b, int max)
@@ -48,9 +146,9 @@ void	sort_gt_five(t_stack **a, t_stack **b, int divide, int size)
 
 	i = 1;
 	start = 0;
-	while (i <= 5)
+	while (i <= divide)
 	{
-		if (i == 5)
+		if (i == divide)
 		{
 			stop = size;
 			push_chunk(a, b, start, stop);
@@ -58,7 +156,7 @@ void	sort_gt_five(t_stack **a, t_stack **b, int divide, int size)
 		}
 		else
 		{
-			stop = (((size / 5) * i) - 1);
+			stop = (((size / divide) * i) - 1);
 			push_chunk(a, b, start, stop);
 			start = stop + 1;
 		}
@@ -78,62 +176,42 @@ static void	master_filter(t_stack **a, t_stack **b, int size)
 	else if (size == 5)
 		sort_five(a, b);
 	else if (size > 5 && size < 200)
-		sort_lt_200(a, b, size);
-}
-
-char	**append(char **dest, char **src)
-{
-	size_t		s;
-	size_t		d;
-	size_t		y;
-	char	**new;
-	char	**tmp;
-
-	d = 0;
-	s = 0;
-	while (dest != NULL && dest[d])
-		d ++;
-	while (src[s])
-		s ++;
-	new = ft_calloc((s + d), sizeof(char *));
-	y = 0;
-	tmp = dest;
-	while (y <= d && d != 0)
-		new[y ++] = ft_strdup(*dest++);
-	free_2d(tmp);
-	while (y <= s && s != 0)
-		new[y ++] = ft_strdup(*src++);
-	return (new);
+	{
+		sort_gt_five(a, b, 5, size);
+		push_back(a, b, size);
+	}
+	else if (size >= 200)
+	{
+		sort_gt_five(a, b, 10, size);
+		push_back(a, b, size);
+	}
 }
 
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
-	char	**args;
-	char	**tmp;
+	int		result;
 
 	stack_a = NULL;
 	stack_b = NULL;
-	args = NULL;
 	if (argc == 1)
 		return (0);
-	while (argv)
+	if (has_empty_arg(argc, argv))
+		return (write(1, "Error 1\n", 8), 0);
+	result = parse_args(&stack_a, ++argv);
+	if (result > 0 && is_convertible(&stack_a))
 	{
-		tmp = ft_split(*argv, ' ');
-		args = append(args, tmp);
-		free_2d(tmp);
-		argv ++;
+		if (is_unique(&stack_a) && !is_sorted(&stack_a))
+		{
+			master_filter(&stack_a, &stack_b, ft_lstsize(stack_a));
+			print_stack(&stack_a);
+		}
+		else
+			return (write(1, "Error 3\n", 8), 0);
 	}
-	if (has_errors(args))
-		return (write(1, "Error : Invalid Args\n", 21), 0);
-	parse_args(&stack_a, args);
-	master_filter(&stack_a, &stack_b, ft_lstsize(stack_a));
-	//print_stack(&stack_b);
-//	printf("\n------\n");
-//	//print_stack(&stack_b);
-//	if (fr)
-//		free_2d(argv);
-//	ft_lstclear(&stack_a);
-	// system("leaks a.out");
+	else
+		return (write(1, "Error 2\n", 8), 0);
+	ft_lstclear(&stack_a);
+	// system("leaks pushswap");
 }

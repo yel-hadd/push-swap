@@ -6,13 +6,13 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 20:41:12 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/16 18:25:28 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/01 17:20:03 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pushswap.h"
 
-t_stack	*ft_lstnew(int content, size_t position)
+t_stack	*ft_lstnew(char *init, int content, size_t position)
 {
 	t_stack	*ptr;
 
@@ -21,6 +21,7 @@ t_stack	*ft_lstnew(int content, size_t position)
 		return (ptr);
 	ptr->position = position;
 	ptr->data = content;
+	ptr->init = init;
 	ptr->next = NULL;
 	return (ptr);
 }

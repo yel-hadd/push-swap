@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:09:31 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/16 17:10:22 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:11:23 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,79 +14,29 @@
 
 int	ft_isdigit(int c)
 {
-	if (c < 48 || c > 57)
-		return (0);
-	return (1);
-}
-
-int	has_duplicates(char **args, int count)
-{
-	size_t	i;
-	size_t	y;
-
-	y = 0;
-	while (*args)
-	{
-		i = 1;
-		while (i < (count - y) && *(args + i))
-		{
-			if (ft_atoi(*args) == ft_atoi(*(args + i)))
-				return (1);
-			i += 1;
-		}
-		args += 1;
-		y += 1;
-	}
-	return (0);
-}
-
-int	has_errors(char **args)
-{
-	size_t	i;
-	char	*str;
-
-	if (!*args || !args)
+	if (c <= '9' || c >= '0')
 		return (1);
-	while (*args)
-	{
-		i = 0;
-		str = *args;
-		while (str[i])
-		{
-			if ((str[i] == '+' || str[i] == '-') && (i != 0))
-				return (1);
-			i ++;
-		}
-		i = 0;
-		while (str[i])
-		{
-			if ((!ft_isdigit(str[i])) && (str[i] != '-') && (str[i] != '+'))
-				return (1);
-			i ++;
-		}
-		args ++;
-	}
 	return (0);
 }
 
-int	is_sorted(char **args, int count)
-{
-	size_t	i;
-	size_t	y;
 
-	y = 0;
-	while (*args)
+
+int	is_sorted(t_stack **lst)
+{
+	t_stack	*tmp;
+	t_stack	*run;
+
+	tmp = *lst;
+	while (tmp != NULL)
 	{
-		i = 1;
-		while (i < (count - y) && *(args + i))
+		run = tmp->next;
+		while (run != NULL)
 		{
-			
-			if (ft_atoi(*args) > ft_atoi(*(args + i)))
+			if (tmp->position > run->position)
 				return (0);
-			i += 1;
+			run = run->next;
 		}
-		args += 1;
-		y += 1;
+		tmp = tmp->next;
 	}
 	return (1);
 }

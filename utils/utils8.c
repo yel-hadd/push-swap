@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 17:16:14 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/28 18:09:48 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/01 17:46:06 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,22 @@ void	*ft_calloc(size_t count, size_t size)
 		return (NULL);
 	ft_bzero(ptr, count * size);
 	return (ptr);
+}
+
+int	ft_strncmp(char *s1, char *s2, size_t n)
+{
+	size_t			i;
+	unsigned char	*uc1;
+	unsigned char	*uc2;
+
+	uc1 = (unsigned char *) s1;
+	uc2 = (unsigned char *) s2;
+	i = 0;
+	while ((uc1[i] || uc2[i]) && i < n)
+	{
+		if (uc1[i] != uc2[i])
+			return (uc1[i] - uc2[i]);
+		i ++;
+	}
+	return (0);
 }
