@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:09:31 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/16 17:10:22 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/07 00:25:36 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,41 @@ int	has_duplicates(char **args, int count)
 	return (0);
 }
 
+int	ft_strncmp(char *s1, char *s2, size_t n)
+{
+	size_t			i;
+	unsigned char	*uc1;
+	unsigned char	*uc2;
+
+	uc1 = (unsigned char *) s1;
+	uc2 = (unsigned char *) s2;
+	i = 0;
+	while ((uc1[i] || uc2[i]) && i < n)
+	{
+		if (uc1[i] != uc2[i])
+			return (uc1[i] - uc2[i]);
+		i ++;
+	}
+	return (0);
+}
+
 int	has_errors(char **args)
 {
 	size_t	i;
 	char	*str;
 
-	if (!*args || !args)
-		return (1);
 	while (*args)
 	{
 		i = 0;
 		str = *args;
 		while (str[i])
 		{
-			if ((str[i] == '+' || str[i] == '-') && (i != 0))
+			if ((str[i] == '+' || str[i] == '-') && !ft_isdigit(str[i + 1]))
 				return (1);
-			i ++;
-		}
-		i = 0;
-		while (str[i])
-		{
-			if ((!ft_isdigit(str[i])) && (str[i] != '-') && (str[i] != '+'))
+			else if ((str[i] == '+' || str[i] == '-') && (i != 0))
+				return (1);
+			else if (!ft_isdigit(str[i]) && !ft_isspace(str[i]) \
+			&& (str[i] != '-') && (str[i] != '+'))
 				return (1);
 			i ++;
 		}

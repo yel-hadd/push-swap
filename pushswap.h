@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:08:37 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/21 00:44:52 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/06 23:57:11 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_lstadd_back(t_stack **lst, t_stack *new);
 int		top_or_buttom(t_stack *stack, int position);
 t_stack	*ft_lstnew(int content, size_t position);
 void	add_index(t_stack **lst, t_stack **node);
+int		ft_strncmp(char *s1, char *s2, size_t n);
 void	reverse_rotate(t_stack **a, char stack);
 int		has_duplicates(char **args, int count);
 void	sort_four(t_stack **a, t_stack **b);
@@ -39,6 +40,7 @@ int		is_sorted(char **args, int count);
 void	get_lst_position(t_stack **lst);
 void	rotate(t_stack **a, char stack);
 void	swap(t_stack **a, char stack);
+size_t	count_words(char *s, char c);
 t_stack *ft_before_last(t_stack *a);
 char	**ft_split(char *s, char c);
 void	ft_lstclear(t_stack **head);
@@ -51,6 +53,6 @@ int		has_spaces(char *str);
 void 	free_2d(char **arr);
 size_t	ft_strlen(char *s);
 int		ft_atoi(char *str);
+int		ft_isspace(char c);
 int		ft_isdigit(int c);
-
 #endif

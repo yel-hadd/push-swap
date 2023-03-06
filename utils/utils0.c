@@ -6,13 +6,13 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 19:22:19 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/16 17:10:26 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/06 23:04:58 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pushswap.h"
 
-static size_t	count_words(char *s, char c)
+size_t	count_words(char *s, char c)
 {
 	size_t	i;
 	size_t	words;
