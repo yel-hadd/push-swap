@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 22:54:06 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/07 05:20:47 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/07 16:57:52 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ int	empty_arg(char **argv)
 	return (0);
 }
 
-//void	f()
-//{
-//	system("leaks a.out");
-//}
+void	f()
+{
+	system("leaks a.out");
+}
 
 int	main(int argc, char **argv)
 {
@@ -105,7 +105,7 @@ int	main(int argc, char **argv)
 	char	**args;
 	size_t	arg_count;
 
-	//atexit(f);
+	atexit(f);
 	stack_a = NULL;
 	stack_b = NULL;
 	if (argc == 1)
@@ -123,5 +123,4 @@ int	main(int argc, char **argv)
 	master_filter(&stack_a, &stack_b, ft_lstsize(stack_a));
 	ft_lstclear(&stack_a);
 	free_2d(args);
-	system("leaks a.out");
 }
