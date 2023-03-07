@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:09:31 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/07 00:25:36 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/07 01:20:40 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,20 @@ int	ft_isdigit(int c)
 	return (1);
 }
 
-int	has_duplicates(char **args, int count)
+int	has_duplicates(char **args)
 {
-	size_t	i;
-	size_t	y;
+	int	i;
 
-	y = 0;
 	while (*args)
 	{
 		i = 1;
-		while (i < (count - y) && *(args + i))
+		while (*(args + i))
 		{
 			if (ft_atoi(*args) == ft_atoi(*(args + i)))
 				return (1);
 			i += 1;
 		}
 		args += 1;
-		y += 1;
 	}
 	return (0);
 }
