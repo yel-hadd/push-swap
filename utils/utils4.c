@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:26:13 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/02/23 15:58:33 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/07 05:03:00 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void free_2d(char **arr)
 		free(arr[i]);
 		arr[i ++] = NULL;
 	}
+	free(arr);
+	arr = NULL;
 }
 
 int	ft_lstsize(t_stack *lst)

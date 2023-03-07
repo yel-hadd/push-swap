@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:09:31 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/07 01:20:40 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/07 05:23:59 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,24 +80,22 @@ int	has_errors(char **args)
 	return (0);
 }
 
-int	is_sorted(char **args, int count)
+int	is_sorted(char **arr)
 {
-	size_t	i;
-	size_t	y;
+	char	**args;
+	int		i;
 
-	y = 0;
+	args = arr;
 	while (*args)
 	{
 		i = 1;
-		while (i < (count - y) && *(args + i))
+		while (*(args + i))
 		{
-			
 			if (ft_atoi(*args) > ft_atoi(*(args + i)))
 				return (0);
 			i += 1;
 		}
 		args += 1;
-		y += 1;
 	}
 	return (1);
 }

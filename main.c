@@ -6,11 +6,24 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 22:54:06 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/07 02:08:56 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/07 05:20:47 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
+
+void	add_to_stack(t_stack **lst, char **argv)
+{
+	t_stack	*node;
+
+	while (*argv)
+	{
+		node = ft_lstnew(ft_atoi(*argv), 0);
+		add_index(lst, &node);
+		ft_lstadd_back(lst, node);
+		argv ++;
+	}
+}
 
 void	*ft_memset(void *b, int c, size_t len)
 {
@@ -80,6 +93,11 @@ int	empty_arg(char **argv)
 	return (0);
 }
 
+//void	f()
+//{
+//	system("leaks a.out");
+//}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
@@ -87,7 +105,7 @@ int	main(int argc, char **argv)
 	char	**args;
 	size_t	arg_count;
 
-
+	//atexit(f);
 	stack_a = NULL;
 	stack_b = NULL;
 	if (argc == 1)
@@ -96,16 +114,14 @@ int	main(int argc, char **argv)
 		return (write(1, "Error : Empty Arg\n", 18), 0);
 	args = parse(--argc, ++argv, &arg_count);
 	if (has_errors(args) || !args)
-		return (write(1, "Error : Invalid Args\n", 21), 0);
+		return (free_2d(args), write(1, "Error : Invalid Args\n", 21), 0);
 	if (has_duplicates(args))
-		return (write(1, "Error : Duplicate Args\n", 24), 0);
-	//if (is_sorted(argv, argc -1))
-	//	return (write(1, "Already Sorted !\n", 18), 0);
-	//while (*args)
-	//{
-	//	printf("%s\n", *args);
-	//	args ++;
-	//}
-	//// TODO: fix is_sorted bug : false positives when argc = 1
-
+		return (free_2d(args), write(1, "Error : Duplicate Args\n", 24), 0);
+	if (is_sorted(args))
+		return (free_2d(args), write(1, "Already Sorted !\n", 18), 0);
+	add_to_stack(&stack_a, argv);
+	master_filter(&stack_a, &stack_b, ft_lstsize(stack_a));
+	ft_lstclear(&stack_a);
+	free_2d(args);
+	system("leaks a.out");
 }
