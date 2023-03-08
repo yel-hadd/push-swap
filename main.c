@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 22:54:06 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/07 16:57:52 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/07 18:01:10 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,24 @@ void	*ft_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
-char	**parse(int argc, char **argv, size_t *size)
+char	*ft_strdup(char *s1)
+{
+	char	*s2;
+	size_t	len;
+
+	len = ft_strlen(s1);
+	s2 = ft_calloc((len + 1), sizeof(char));
+	if (!s2)
+		return (0);
+	ft_memcpy(s2, (const void *) s1, ((len + 1) * sizeof(char)));
+	return (s2);
+}
+
+char	**parse(int argc, char **argv)
 {
 	int		i;
 	int		y;
+	int		z;
 	char	**tmp;
 	size_t	count;
 	char	**args;
@@ -67,15 +81,16 @@ char	**parse(int argc, char **argv, size_t *size)
 	count = 0;
 	while (++i < argc)
 		count += count_words(argv[i], ' ');
-	*size = count;
 	args = ft_calloc(count + 1, sizeof(char *));
 	i = -1;
 	y = -1;
 	while (++i < argc)
 	{
 		tmp = ft_split(argv[i], ' ');
-		while (*tmp)
-			args[++y] = *(tmp ++);
+		z = 0;
+		while (tmp[z])
+			args[++y] = ft_strdup(tmp[z++]);
+		free_2d(tmp);
 	}
 	return (args);
 }
@@ -103,7 +118,6 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 	char	**args;
-	size_t	arg_count;
 
 	atexit(f);
 	stack_a = NULL;
@@ -112,7 +126,7 @@ int	main(int argc, char **argv)
 		return (0);
 	if (empty_arg(argv))
 		return (write(1, "Error : Empty Arg\n", 18), 0);
-	args = parse(--argc, ++argv, &arg_count);
+	args = parse(--argc, ++argv);
 	if (has_errors(args) || !args)
 		return (free_2d(args), write(1, "Error : Invalid Args\n", 21), 0);
 	if (has_duplicates(args))
