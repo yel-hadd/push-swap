@@ -1,35 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils0.c                                           :+:      :+:    :+:   */
+/*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 19:22:19 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/06 23:04:58 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/10 20:17:43 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pushswap.h"
-
-size_t	count_words(char *s, char c)
-{
-	size_t	i;
-	size_t	words;
-
-	i = 0;
-	words = 0;
-	while (s[i])
-	{
-		while (s[i] == c && s[i])
-			i ++;
-		if (s[i] != c && s[i])
-			words++;
-		while (s[i] != c && s[i])
-			i++;
-	}
-	return (words);
-}
 
 static size_t	word_len(char *s, char c)
 {

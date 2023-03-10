@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:08:37 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/07 03:56:11 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/10 20:42:16 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@ typedef struct	s_stack
 	int	position;
 } t_stack;
 
+void	sort_gt_five(t_stack **a, t_stack **b, int divide, int size);
+void	push_chunk(t_stack **a, t_stack **b, int start, int stop);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	push(t_stack **dest, t_stack **source, char stack);
 void	master_filter(t_stack **a, t_stack **b, int size);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+void	push_back(t_stack **a, t_stack **b, int max);
 void	ft_lstadd_front(t_stack **lst, t_stack *new);
 void	ft_lstadd_back(t_stack **lst, t_stack *new);
 int		top_or_buttom(t_stack *stack, int position);
