@@ -12,6 +12,13 @@
 
 #include "../pushswap.h"
 
+/*
+This function sorts a stack of the size 4
+It pushes the node with position 0 to stack b,
+then it sorts the remaining 3 node using sort_three()
+then it pushes back the node with the position 0 to stack a
+*/
+
 void	sort_four(t_stack **a, t_stack **b)
 {
 	int	where;
