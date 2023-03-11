@@ -12,6 +12,12 @@
 
 #include "../pushswap.h"
 
+/*
+This function sorts a stack of the size 3
+It handles all the possible combinations based on the comparaison
+of the position of each node
+*/
+
 void	sort_three(t_stack **a)
 {
     int     first;
