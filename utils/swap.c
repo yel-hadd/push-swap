@@ -12,6 +12,10 @@
 
 #include "../pushswap.h"
 
+/*
+This Function swaps the first two nodes of a stack
+*/
+
 void	swap(t_stack **a, char stack)
 {
 	t_stack	*var;
