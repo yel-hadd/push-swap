@@ -12,9 +12,16 @@
 
 #include "../pushswap.h"
 
-void	sort_five(t_stack **a, t_stack **b)
+/*
+This function sorts a stack of the size 5
+It pushes the nodes with positions 0 and 1 to stack b,
+then it sorts the remaining 3 node using sort_three()
+then it pushes back the nodes with positions 0 and 1 to stack a
+*/
+
+void sort_five(t_stack **a, t_stack **b)
 {
-	int	where;
+	int where;
 
 	where = top_or_buttom(*a, 0);
 	while (where == 0 && (*a)->position != 0)
