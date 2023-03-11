@@ -12,6 +12,12 @@
 
 #include "../pushswap.h"
 
+/*
+This function sorts a stack of the size greater than five
+It splits stack a into (int divide) chunks then,
+it pushes each chunk to stack b
+*/
+
 void	sort_gt_five(t_stack **a, t_stack **b, int divide, int size)
 {
 	int	i;
