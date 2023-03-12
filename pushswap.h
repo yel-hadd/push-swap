@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:08:37 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/11 23:09:34 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:46:53 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 # define PUSHSWAP_H
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
 
-typedef struct	s_stack
+typedef struct s_stack
 {
-	int	data;
+	int				data;
 	struct s_stack	*next;
-	int	position;
-} t_stack;
+	int				position;
+}	t_stack;
 
 void	sort_gt_five(t_stack **a, t_stack **b, int divide, int size);
 void	push_chunk(t_stack **a, t_stack **b, int start, int stop);
@@ -44,10 +43,10 @@ void	sort_four(t_stack **a, t_stack **b);
 void	sort_five(t_stack **a, t_stack **b);
 void	get_lst_position(t_stack **lst);
 void	rotate(t_stack **a, char stack);
-char	**parse(int argc, char **argv);
+char	**parse(int argc, char **argv, int z);
 void	swap(t_stack **a, char stack);
 size_t	count_words(char *s, char c);
-t_stack *ft_before_last(t_stack *a);
+t_stack	*ft_before_last(t_stack *a);
 char	**ft_split(char *s, char c);
 void	ft_lstclear(t_stack **head);
 int		has_duplicates(char **args);
@@ -61,7 +60,7 @@ int		is_sorted(char **args);
 int		empty_arg(char **argv);
 int		has_spaces(char *str);
 char	*ft_strdup(char *s1);
-void 	free_2d(char **arr);
+void	free_2d(char **arr);
 size_t	ft_strlen(char *s);
 int		ft_atoi(char *str);
 int		ft_isspace(char c);

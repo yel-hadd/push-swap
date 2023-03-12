@@ -6,18 +6,18 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 20:29:27 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/11 23:03:42 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:25:28 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pushswap.h"
 
-void free_2d(char **arr)
+void	free_2d(char **arr)
 {
 	int	i;
 
 	i = 0;
-	while(arr[i])
+	while (arr[i])
 	{
 		free(arr[i]);
 		arr[i ++] = NULL;

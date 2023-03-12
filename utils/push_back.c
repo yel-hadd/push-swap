@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 20:38:11 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/11 23:04:48 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:32:29 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	push_back(t_stack **a, t_stack **b, int max)
 {
-	int where;
+	int	where;
 
 	while (-- max >= 0)
 	{

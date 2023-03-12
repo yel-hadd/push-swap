@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 19:06:24 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/11 23:05:00 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:34:09 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ then it sorts the remaining 3 node using sort_three()
 then it pushes back the nodes with positions 0 and 1 to stack a
 */
 
-void sort_five(t_stack **a, t_stack **b)
+void	sort_five(t_stack **a, t_stack **b)
 {
-	int where;
+	int	where;
 
 	where = top_or_buttom(*a, 0);
 	while (where == 0 && (*a)->position != 0)

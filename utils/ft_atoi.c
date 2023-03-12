@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:08:29 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/11 23:12:39 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:26:10 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ int	ft_atoi(char *str)
 		}
 		str ++;
 	}
-	return ((int) (result * sign));
+	return ((int)(result * sign));
 }

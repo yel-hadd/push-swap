@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 22:54:06 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/11 23:12:17 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:31:18 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 		return (0);
 	if (empty_arg(argv))
 		return (write(1, "Error\n", 6), 0);
-	args = parse(--argc, ++argv);
+	args = parse(--argc, ++argv, 0);
 	if (has_errors(args) || !args)
 		return (free_2d(args), write(1, "Error\n", 6), 0);
 	if (has_duplicates(args))

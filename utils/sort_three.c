@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 20:36:50 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/11 23:05:10 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:35:15 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ of the position of each node
 
 void	sort_three(t_stack **a)
 {
-    int     first;
-    int     middle;
-    int     last;
+	int	first;
+	int	middle;
+	int	last;
 
-    first = (*a)->position;
-    middle = (*a)->next->position;
-    last = ft_lstlast(*a)->position;
+	first = (*a)->position;
+	middle = (*a)->next->position;
+	last = ft_lstlast(*a)->position;
 	if (last > first && first > middle)
 		swap(a, 'a');
 	else if (first > middle && middle > last)

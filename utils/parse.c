@@ -6,17 +6,16 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 22:58:36 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/11 23:06:26 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:30:59 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pushswap.h"
 
-char	**parse(int argc, char **argv)
+char	**parse(int argc, char **argv, int z)
 {
 	int		i;
 	int		y;
-	int		z;
 	char	**tmp;
 	size_t	count;
 	char	**args;
