@@ -1,5 +1,7 @@
 # push-swap
 Push_swap is a project that involves sorting a stack of numbers using a set of instructions. The project is written in C and can be compiled with a Makefile.
+## Preview
+https://github.com/yel-hadd/push-swap/assets/82560247/011cf0e5-a675-4a88-8692-67ffbe61a4c0
 ## Allowed Instructions
 * sa : swap the first two elements at the top of stack a.
 * sb : swap the first two elements at the top of stack b.
